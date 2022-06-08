@@ -6,29 +6,33 @@ import Headwear from "./routes/product/Headwear";
 import Nav from "./Nav";
 import Member from "./routes/Member";
 import Cart from "./routes/Cart";
+import Join from "./routes/Join";
 
 function App() {
   return (
     <Router>
-      <Nav />
-      <Routes>
-        <Route exact path="/" element={<Home />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/product/outwear" element={<Outwear />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/product/tees" element={<Tees />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/product/headwear" element={<Headwear />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/member" element={<Member />} />
-      </Routes>
-      <Routes>
-        <Route exact path="/cart" element={<Cart />} />
-      </Routes>
+      <div>
+        <main>
+          <Nav />
+          <section>
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+            </Routes>
+            <Routes>
+              <Route path="/product/outwear" element={<Outwear />} />
+              <Route path="/product/tees" element={<Tees />} />
+              <Route path="/product/headwear" element={<Headwear />} />
+            </Routes>
+            <Routes>
+              <Route exact path="/member" element={<Member />} />
+              <Route exact path="/member/join" element={<Join />} />
+            </Routes>
+            <Routes>
+              <Route path="/cart" element={<Cart />} />
+            </Routes>
+          </section>
+        </main>
+      </div>
     </Router>
   );
 }
