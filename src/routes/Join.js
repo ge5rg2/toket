@@ -2,28 +2,27 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Join = () => {
-  const [id, isId] = useState("");
-  const [pw, isPw] = useState("");
-  const [repw, isRePw] = useState("");
-  const [checkIDPW, isCheckIDPW] = useState(false);
+  const [userinfo, isUserinfo] = useState({
+    id: "",
+    pw: "",
+    repw: "",
+  });
 
-  const idSet = (e) => {
-    isId(e.target.value);
-  };
-  const pwSet = (e) => {
-    isPw(e.target.value);
+  const handleInputValue = (key) => (e) => {
+    isUserinfo({ ...userinfo, [key]: e.target.value });
   };
 
-  const repwSet = (e) => {
-    isRePw(e.target.value);
-  };
   const createBtn = (e) => {
     e.preventDefault();
-    if (id.length > 0 && pw === repw && pw.length > 0) {
+    if (
+      userinfo.id.length > 0 &&
+      userinfo.pw === userinfo.repw &&
+      userinfo.pw.length > 0
+    ) {
       alert("Sucessfull!");
-      console.log(id, pw);
-      localStorage.setItem("id", id);
-      localStorage.setItem("pw", pw);
+      console.log(userinfo.id, userinfo.pw);
+      localStorage.setItem("id", userinfo.id);
+      localStorage.setItem("pw", userinfo.pw);
       window.location.href = "/member";
     } else {
       alert("Please reCheck requirement");
@@ -42,23 +41,23 @@ const Join = () => {
           <li>
             <label>ID</label>
             <input
-              onChange={(e) => idSet(e)}
+              onChange={handleInputValue("id")}
               required
               type="text"
               maxLength="10"
             ></input>
-            {id.length > 0 ? <span>✅</span> : ""}
+            {userinfo.id.length > 0 ? <span>✅</span> : ""}
           </li>
           <li>
             <label>Password</label>
             <input
-              onChange={(e) => pwSet(e)}
+              onChange={handleInputValue("pw")}
               required
               type="password"
               minLength="4"
               maxLength="10"
             ></input>
-            {pw.length >= 4 && pw.length <= 10 ? (
+            {userinfo.pw.length >= 4 && userinfo.pw.length <= 10 ? (
               <span>✅</span>
             ) : (
               <span>You should satisfy to requirement</span>
@@ -67,13 +66,17 @@ const Join = () => {
           <li>
             <label>Password Check</label>
             <input
-              onChange={(e) => repwSet(e)}
+              onChange={handleInputValue("repw")}
               required
               type="password"
               minLength="4"
               maxLength="10"
             ></input>
-            {pw === repw && pw.length > 0 ? <span>✅</span> : <span>❎</span>}
+            {userinfo.pw === userinfo.repw && userinfo.pw.length > 0 ? (
+              <span>✅</span>
+            ) : (
+              <span>❎</span>
+            )}
           </li>
         </ul>
         <button onClick={(e) => createBtn(e)}>Create Account</button>
