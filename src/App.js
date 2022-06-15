@@ -1,12 +1,12 @@
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./routes/Home";
-import Outwear from "./routes/product/Outwear";
-import Tees from "./routes/product/Tees";
 import Headwear from "./routes/product/Headwear";
+import Detail from "./routes/product/component/Detail";
 import Nav from "./Nav";
 import Member from "./routes/Member";
 import Cart from "./routes/Cart";
 import Join from "./routes/Join";
+import { Reset } from "styled-reset";
 
 function App() {
   return (
@@ -19,9 +19,8 @@ function App() {
               <Route exact path="/" element={<Home />} />
             </Routes>
             <Routes>
-              <Route path="/product/outwear" element={<Outwear />} />
-              <Route path="/product/tees" element={<Tees />} />
               <Route path="/product/headwear" element={<Headwear />} />
+              <Route path="/product/detail/:id" element={<Detail />} />
             </Routes>
             <Routes>
               <Route exact path="/member" element={<Member />} />
